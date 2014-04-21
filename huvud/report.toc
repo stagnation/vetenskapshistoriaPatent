@@ -1,6 +1,0 @@
-\select@language {swedish}
-\contentsline {section}{\numberline {0.1}inledning}{1}{section.0.1}
-\contentsline {section}{\numberline {0.2}Europa}{1}{section.0.2}
-\contentsline {subsection}{\numberline {0.2.1}Innan patent systemet}{1}{subsection.0.2.1}
-\contentsline {subsection}{\numberline {0.2.2}steg mot ett patent system}{2}{subsection.0.2.2}
-\contentsline {section}{\numberline {0.3}2}{2}{section.0.3}
