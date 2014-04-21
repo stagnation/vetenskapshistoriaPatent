@@ -1,0 +1,159 @@
+\ProvidesPackage{NHQM}
+\usepackage[disable]{todonotes}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[]{lmodern}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{ae}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{bbm}
+\usepackage{units}
+\usepackage{siunitx}
+\usepackage{cancel}
+\sisetup{
+	mode = math,
+	exponent-product = \cdot
+}
+\usepackage{textcomp}
+\usepackage{microtype}
+\usepackage{multirow}
+\usepackage{subfig}
+\usepackage{mhchem}
+\usepackage{subfiles}
+\usepackage{eso-pic}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage[font=small, width=.9\textwidth]{caption}
+
+\usepackage{afterpage}
+
+\usepackage{tikz}
+\usetikzlibrary{
+  decorations.pathreplacing,
+  decorations.markings, 
+  decorations.pathmorphing,
+  shapes.geometric,
+  external,
+  calc,
+}
+%\tikzexternalize[prefix = figures/]
+\tikzset{
+  >=stealth,
+  % style to apply some styles to each segment of a path
+  on each segment/.style={
+    decorate,
+    decoration={
+      show path construction,
+      moveto code={},
+      lineto code={
+        \path [#1]
+        (\tikzinputsegmentfirst) -- (\tikzinputsegmentlast);
+      },
+      curveto code={
+        \path [#1] (\tikzinputsegmentfirst)
+        .. controls
+        (\tikzinputsegmentsupporta) and (\tikzinputsegmentsupportb)
+        ..
+        (\tikzinputsegmentlast);
+      },
+      closepath code={
+        \path [#1]
+        (\tikzinputsegmentfirst) -- (\tikzinputsegmentlast);
+      },
+    },
+  },
+  % style to add an arrow in the middle of a path
+  ->-/.style={postaction={decorate,decoration={
+        markings,
+        mark=at position .52 with {\arrow[#1,shorten >=-10pt]{>}}
+      }}},
+  mid arrows/.style={postaction={on each segment={->-}}},
+}
+\usepackage{pgfplots}
+\pgfplotsset{
+  compat = 1.5,
+  samples = 200
+}
+\setlength{\marginparwidth}{3cm}
+\reversemarginpar
+\makeatletter
+\renewcommand{\todo}[2][]{\tikzexternaldisable\@todo[#1]{#2}\tikzexternalenable}
+\makeatother
+
+
+\DeclareUnicodeCharacter{00A0}{ }
+
+
+\usepackage{hyperref}
+\usepackage[capitalize]{cleveref}
+\crefformat{equation}{(#2#1#3)}
+\Crefformat{equation}{Equation~(#2#1#3)}
+\crefrangeformat{equation}{(#3#1#4) to~(#5#2#6)}
+\Crefrangeformat{equation}{Equations~(#3#1#4) to~(#5#2#6)}
+\crefmultiformat{equation}{(#2#1#3)}{ and~(#2#1#3)}{, (#2#1#3)}{ and~(#2#1#3)}
+
+\newcommand{\fint}[1][]{%
+  \def\cmdDefaultA{#1}%
+  \fintNext
+}
+\newcommand{\fintNext}[2][]{%
+  \int_{\cmdDefaultA}^{#1} \rd{#2} \,
+}
+
+
+\let\originalleft\left
+\let\originalright\right
+\renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
+\renewcommand{\right}{\aftergroup\egroup\originalright}
+\newcommand{\p}[1]{\left(#1\right)}
+\newcommand{\bigp}[1]{\p{#1\big.}}
+\renewcommand{\b}[1]{\left[#1\right]}
+\newcommand{\bigb}[1]{\b{#1\big.}}
+
+\mathchardef\mhyphen="2D
+\newcommand{\Z}{\ensuremath{\mathbbm{Z}}}
+\newcommand{\Q}{\ensuremath{\mathbbm{Q}}}
+\newcommand{\R}{\ensuremath{\mathbbm{R}}}
+\newcommand{\C}{\ensuremath{\mathbbm{C}}}
+\newcommand{\rd}{\ensuremath{\mathrm{d}}}
+\newcommand{\id}{\ensuremath{\,\rd}}
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
+\renewcommand{\H}{\ensuremath{\mathcal{H}}}
+\newcommand{\N}{\ensuremath{\mathcal{N}}}
+\newcommand{\ket}[1]{\left| #1 \right\rangle}
+\newcommand{\bra}[1]{\left\langle #1 \right|}
+\newcommand{\braket}[2]{\langle #1 | #2 \rangle}
+\newcommand{\pket}[1]{\left| #1 \right)}
+\newcommand{\pbra}[1]{\left( #1 \right|}
+\newcommand{\pbraket}[2]{( #1 | #2 )}
+\newcommand{\norm}[1]{\braket{#1}{#1}}
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\comm}[1]{\left[#1\right]}
+\renewcommand{\Re}{\ensuremath{\operatorname{Re}}}
+\renewcommand{\Im}{\ensuremath{\operatorname{Im}}}
+\newcommand{\dd}[2][]{ \frac{ \partial #1}{ \partial #2}}
+\newcommand{\ddsq}[2][]{ \frac{ \partial^2 #1}{ \partial #2^2}}
+\newcommand{\ddt}[1][]{ \frac{ \partial#1}{ \partial t}}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\absq}[1]{\abs{#1}^2}
+\newcommand{\mean}[1]{\left\langle #1 \right\rangle}
+\newcommand{\uppg}[1]{\vspace{1em} \noindent\textbf{Uppgift #1}}
+\newcommand{\sub}[1]{_\textup{#1}}
+\newcommand{\ordo}{\ensuremath{\mathcal{O}}}
+\newcommand{\bis}{{\prime\prime}}
+\newcommand{\Res}{\ensuremath{\operatorname{Res}}}
+\renewcommand{\inf}{\infty}
+\newcommand{\minf}{{-\infty}}
+\renewcommand{\d}{\partial}
+\newcommand{\useq}[1]{\stackrel{\eqref{#1}}{=}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\He}[1]{\ce{^#1He}}
+
+\newenvironment{eq}
+{\begin{equation}\begin{aligned}}
+{\end{aligned}\end{equation}\ignorespacesafterend}
+\newenvironment{eq*}
+{\begin{equation*}\begin{aligned}}
+{\end{aligned}\end{equation*}\ignorespacesafterend}
